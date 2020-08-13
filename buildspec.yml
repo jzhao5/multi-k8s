@@ -13,19 +13,30 @@ phases:
         - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
      ##   - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' hello-k8s.yml
         - REPOSITORY_URI_1=149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client
-        - REPOSITORY_URI_3=149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server
-        - REPOSITORY_URI_4=149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker
+        - REPOSITORY_URI_2=149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server
+        - REPOSITORY_URI_3=149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker
+        - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+     ##   - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
         - $(aws ecr get-login --no-include-email)
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
          - echo Build started on `date`
          - echo Building the Docker image...
-    ##     - docker run -e CI=true multi-docker npm run test
+         - echo $CODEBUILD_SRC_DIR
+         - docker build -t $REPOSITORY_URI_1:latest ./client
+         - docker tag $REPOSITORY_URI_1:latest $REPOSITORY_URI_1:$TAG
+         - docker build -t $REPOSITORY_URI_2:latest ./server
+         - docker tag $REPOSITORY_URI_2:latest $REPOSITORY_URI_2:$TAG
+         - docker build -t $REPOSITORY_URI_3 ./worker
+         - docker tag $REPOSITORY_URI_3:latest $REPOSITORY_URI_3:$TAG
 
   post_build:
     commands:
  ##     - docker push $REPOSITORY_URI:$TAG
+      - docker push $REPOSITORY_URI_1:$IMAGE_TAG
+      - docker push $REPOSITORY_URI_2:$IMAGE_TAG
+      - docker push $REPOSITORY_URI_3:$IMAGE_TAG
       - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
