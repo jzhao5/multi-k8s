@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: worker
-        image: jzhao5/multi-worker2
+        image: CONTAINER_IMAGE
         env:
           - name: REDIS_HOST
             value: redis-cluster-ip-service

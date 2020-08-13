@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: jzhao5/multi-server2
+        image: CONTAINER_IMAGE
         resources:
           limits:
             memory: "128Mi"
