@@ -11,9 +11,9 @@ phases:
   pre_build:
       commands:
         - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
-        - sed -i 's@149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client@'"$REPOSITORY_URI1:$TAG"'@' ./k8s/client-deployment.yml
-        - sed -i 's@149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server@'"$REPOSITORY_URI2:$TAG"'@' ./k8s/server-deployment.yml
-        - sed -i 's@149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker@'"$REPOSITORY_URI3:$TAG"'@' ./k8s/worker-deployment.yml
+       ## - sed -i 's@149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client@'"$REPOSITORY_URI1:$TAG"'@' ./k8s/client-deployment.yml
+       ## - sed -i 's@149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server@'"$REPOSITORY_URI2:$TAG"'@' ./k8s/server-deployment.yml
+       ## - sed -i 's@149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker@'"$REPOSITORY_URI3:$TAG"'@' ./k8s/worker-deployment.yml
         - REPOSITORY_URI_1=149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client
         - REPOSITORY_URI_2=149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server
         - REPOSITORY_URI_3=149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker
@@ -25,13 +25,13 @@ phases:
          - echo Build started on `date`
          - echo Building the Docker image...
          - echo $CODEBUILD_SRC_DIR
-         - docker build -t $REPOSITORY_URI_1:latest ./client
+         - docker build -t $REPOSITORY_URI_1 ./client
          - docker tag $REPOSITORY_URI_1:latest $REPOSITORY_URI_1:$TAG
          - docker push $REPOSITORY_URI_1:latest
-         - docker build -t $REPOSITORY_URI_2:latest ./server
+         - docker build -t $REPOSITORY_URI_2 ./server
          - docker tag $REPOSITORY_URI_2:latest $REPOSITORY_URI_2:$TAG
          - docker push $REPOSITORY_URI_2:latest
-         - docker build -t $REPOSITORY_URI_3:latest ./worker
+         - docker build -t $REPOSITORY_URI_3 ./worker
          - docker tag $REPOSITORY_URI_3:latest $REPOSITORY_URI_3:$TAG
          - docker push $REPOSITORY_URI_3:latest
 
