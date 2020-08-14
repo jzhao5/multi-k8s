@@ -16,6 +16,7 @@ spec:
       - name: server
         image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server
         imagePullPolicy: "Always"
+        command: [ "echo", "SUCCESS" ]
         resources:
           limits:
             memory: "128Mi"
