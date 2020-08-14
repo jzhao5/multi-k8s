@@ -25,10 +25,10 @@ phases:
          - echo Build started on `date`
          - echo Building the Docker image...
          - echo $CODEBUILD_SRC_DIR
-         - docker build -t $REPOSITORY_URI_1:latest ./client
+         - docker build -t $REPOSITORY_URI_1 ./client
          - docker tag $REPOSITORY_URI_1:latest $REPOSITORY_URI_1:$TAG
          - docker push $REPOSITORY_URI_1:latest
-         - docker build -t $REPOSITORY_URI_2:latest ./server
+         - docker build -t $REPOSITORY_URI_2 ./server
          - docker tag $REPOSITORY_URI_2:latest $REPOSITORY_URI_2:$TAG
          - docker push $REPOSITORY_URI_2:latest
          - docker build -t $REPOSITORY_URI_3 ./worker
@@ -37,9 +37,9 @@ phases:
 
   post_build:
     commands:
-      - docker push $REPOSITORY_URI_1:$TAG
-      - docker push $REPOSITORY_URI_2:$TAG
-      - docker push $REPOSITORY_URI_3:$TAG
+   ##   - docker push $REPOSITORY_URI_1:$TAG
+   ##   - docker push $REPOSITORY_URI_2:$TAG
+   ##   - docker push $REPOSITORY_URI_3:$TAG
       - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
