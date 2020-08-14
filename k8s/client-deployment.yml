@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client:eks-workshop-sample-api-service-go.master..2020-08-13.07.29.21.d3823977
+        image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client
         resources:
           limits:
             memory: "128Mi"

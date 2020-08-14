@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: worker
-        image: CONTAINER_IMAG
+        image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker
         env:
           - name: REDIS_HOST
             value: redis-cluster-ip-service
