@@ -34,6 +34,7 @@ phases:
 
   post_build:
     commands:
+      - docker push $REPOSITORY_URI_1:$TAG
       - docker push $REPOSITORY_URI_1:$TAG:latest
       - docker push $REPOSITORY_URI_2:$TAG:latest
       - docker push $REPOSITORY_URI_3:$TAG:latest
