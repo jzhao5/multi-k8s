@@ -18,7 +18,8 @@ spec:
         app: web
     spec:
       containers:
-      - image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client             
+      - name: client
+        image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client             
         imagePullPolicy: "Always"
         name: multi-client
        ## name: multi-client

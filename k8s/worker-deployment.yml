@@ -13,7 +13,8 @@ spec:
         app: worker
     spec:
       containers:
-      - image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker
+      - name: worker
+        image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker
         imagePullPolicy: "Always"
         name: multi-worker
         env:
