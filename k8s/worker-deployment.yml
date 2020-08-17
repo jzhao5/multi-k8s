@@ -13,11 +13,9 @@ spec:
         app: worker
     spec:
       containers:
-      - name: worker
+      - name: multi-worker
         image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-worker
         imagePullPolicy: "Always"
-        name: multi-worker
-        terminationGracePeriodSeconds: 30
         env:
           - name: REDIS_HOST
             value: redis-cluster-ip-service
