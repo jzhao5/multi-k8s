@@ -17,6 +17,7 @@ spec:
         image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server
         imagePullPolicy: "Always"
         name: multi-server
+        terminationGracePeriodSeconds: 30
         resources:
           limits:
             memory: "128Mi"
