@@ -19,10 +19,9 @@ spec:
     spec:
       containers:
       - name: client
-        image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client             
+        image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client:latest             
         imagePullPolicy: "Always"
         name: multi-client
-       ## name: multi-client
        ## terminationGracePeriodSeconds: 30 (add Lifecycle)
        ## imagePullPolicy: "IfNotPresent"
         resources:
