@@ -15,7 +15,8 @@ spec:
       containers:
       - name: client
         image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-client             
-       ## imagePullPolicy: "Always"
+        imagePullPolicy: "Always"
+        name: multi-client
        ## imagePullPolicy: "IfNotPresent"
         resources:
           limits:
