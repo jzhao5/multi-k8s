@@ -47,9 +47,9 @@ phases:
       - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
       - kubectl apply -f k8s
-      - kubectl set image deployments/client-deployment client=$REPOSITORY_URI_1:$TAG
-      - kubectl set image deployments/client-deployment client=$REPOSITORY_URI_2:$TAG
-      - kubectl set image deployments/client-deployment client=$REPOSITORY_URI_3:$TAG
+      - kubectl set image deployments/client-deployment multi-client=$REPOSITORY_URI_1:$TAG
+      - kubectl set image deployments/client-deployment multi-server=$REPOSITORY_URI_2:$TAG
+      - kubectl set image deployments/client-deployment multi-worker=$REPOSITORY_URI_3:$TAG
       - printf '[{"name":"complexk8s","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
 artifacts:
   files: build.json
