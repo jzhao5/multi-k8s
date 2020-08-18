@@ -18,9 +18,9 @@ spec:
         app: server
     spec:
       containers:
-      - image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server
-        imagePullPolicy: "Always"
-        name: multi-server
+      - name: multi-server 
+        image: 149083378091.dkr.ecr.us-east-1.amazonaws.com/multi-server
+        imagePullPolicy: "Always"     
         resources:
           limits:
             memory: "128Mi"

@@ -27,13 +27,13 @@ phases:
          - echo $CODEBUILD_SRC_DIR
          - docker build -t $REPOSITORY_URI_1 ./client
          - docker tag $REPOSITORY_URI_1:latest $REPOSITORY_URI_1:$TAG
-         - docker push $REPOSITORY_URI_1:latest
+      ##   - docker push $REPOSITORY_URI_1:latest
          - docker build -t $REPOSITORY_URI_2 ./server
          - docker tag $REPOSITORY_URI_2:latest $REPOSITORY_URI_2:$TAG
-         - docker push $REPOSITORY_URI_2:latest
+      ##   - docker push $REPOSITORY_URI_2:latest
          - docker build -t $REPOSITORY_URI_3 ./worker
          - docker tag $REPOSITORY_URI_3:latest $REPOSITORY_URI_3:$TAG
-         - docker push $REPOSITORY_URI_3:latest
+      ##   - docker push $REPOSITORY_URI_3:latest
 
   post_build:
     commands:
