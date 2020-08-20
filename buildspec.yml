@@ -46,7 +46,7 @@ phases:
       - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
       - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
-      - kubectl apply -f k8s
+      - kubectl apply -f k8s --namespace=complexk8s
       - kubectl set image deployments/client-deployment multi-client=$REPOSITORY_URI_1:$TAG
       - kubectl set image deployments/server-deployment multi-server=$REPOSITORY_URI_2:$TAG
       - kubectl set image deployments/worker-deployment multi-worker=$REPOSITORY_URI_3:$TAG
