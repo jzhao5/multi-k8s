@@ -57,7 +57,7 @@ reports:
 
   post_build:
     commands:
-      - aws ssm put-parameter --name bridgecrew_api_key --value 778239da-3551-5cad-bb56-253641370b53 --type SecureString
+      ## - aws ssm put-parameter --name bridgecrew_api_key --value 778239da-3551-5cad-bb56-253641370b53 --type SecureString
       - docker push $REPOSITORY_URI_1:$TAG
       - docker push $REPOSITORY_URI_2:$TAG
       - docker push $REPOSITORY_URI_3:$TAG
