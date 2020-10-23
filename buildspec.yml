@@ -10,8 +10,6 @@ phases:
     runtime-versions:
       python: 3.7
     commands:
-      - yum -y groupinstall development
-      - yum -y install zlib-devel
       - wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
       - tar xJf Python-3.7.0.tar.xz
       - cd Python-3.7.0
