@@ -6,9 +6,7 @@ version: 0.2
   ##parameter-store:
       ##BC_API_KEY: "bridgecrew_api_key"
 phases:
-  ##install:
-    ##runtime-versions:
-      ##python: 3.7
+  install:
     commands:     
       - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
       - curl -sS -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/kubectl
@@ -45,18 +43,9 @@ phases:
          - docker build -t $REPOSITORY_URI_3 ./worker
          - docker tag $REPOSITORY_URI_3:latest $REPOSITORY_URI_3:$TAG
       ##   - docker push $REPOSITORY_URI_3:latest
-         ##- bridgecrew -d . --bc-api-key $BC_API_KEY --repo-id $CODEBUILD_ACCOUNT_ID/$CODEBUILD_PROJECT --branch $CODEBUILD_GIT_BRANCH -s
-         ##- bridgecrew -d . -o junitxml > test_results.xml
-##reports:
-  ##bridgecrew-infrastructure-security:
-    ##files:
-       ##- test_results.xml
-    ##discard-paths: yes
-    ##file-format: JunitXml
 
   post_build:
     commands:
-      ## - aws ssm put-parameter --name bridgecrew_api_key --value 778239da-3551-5cad-bb56-253641370b53 --type SecureString
       - docker push $REPOSITORY_URI_1:$TAG
       - docker push $REPOSITORY_URI_2:$TAG
       - docker push $REPOSITORY_URI_3:$TAG
