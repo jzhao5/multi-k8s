@@ -49,7 +49,7 @@ phases:
           }
          - echo "login source registry"
          - $(aws ecr get-login --no-include-email --region us-east-1)
-         - srcImage="$ECR_SRC_REG_ID.dkr.ecr.$ECR_SRC_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_REPO_TAG"
+         - srcImage="149083378091.dkr.ecr.us-east-1.amazonaws.com/$ECR_REPO_NAME:$ECR_REPO_TAG"
          - echo "pull image"
          - docker pull $srcImage
          - targetRegions=us-west-2
