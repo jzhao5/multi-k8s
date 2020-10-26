@@ -50,8 +50,8 @@ phases:
          - echo "login source registry"
          - $(aws ecr get-login --no-include-email --region us-east-1)
          - srcImage="149083378091.dkr.ecr.us-east-1.amazonaws.com/$ECR_REPO_NAME:$ECR_REPO_TAG"
-         - echo "pull image"
-         - docker pull $srcImage
+      ##   - echo "pull image"
+      ##   - docker pull $srcImage
          - targetRegions=us-west-2
          - IFS=","; for reg in $targetRegions; do
           check_create_repo $reg $ECR_REPO_NAME
